@@ -1,7 +1,6 @@
 package org.courses.commands.jdbc;
 
 import org.courses.Entities.Manufacture;
-import org.courses.Entities.Type;
 import org.courses.commands.Command;
 import org.courses.commands.CommandFormatException;
 

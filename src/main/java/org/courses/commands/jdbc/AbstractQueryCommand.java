@@ -1,7 +1,6 @@
 package org.courses.commands.jdbc;
 
 import org.courses.Entities.Entyty;
-import org.courses.Entities.Type;
 
 import java.util.Scanner;
 import java.lang.reflect.Field;
@@ -24,33 +23,17 @@ public abstract class AbstractQueryCommand {
     private String connectionString() {
         Path path = Paths.get(dbFile);
         return String.format("jdbc:sqlite:%s", path.toAbsolutePath());
-
     }
-
-//    void insert(String table, String columns, String values) throws SQLException {
-//        Connection connection = connect();
-//        Statement statement = connection.createStatement();
-//        statement.execute(String.format("INSERT INTO %s" +
-//                "(%s) " +
-//                "VALUES" +
-//                "(%s)", table, columns, values));
-//        statement.close();
-//        connection.close();
-//    }
 
     void insert(Entyty entity) throws SQLException {
 
         Class classEntity = entity.getClass();
         String table = classEntity.getSimpleName();
         System.out.println(table);
-        StringBuilder sb = new StringBuilder();
         Field[] fields = classEntity.getDeclaredFields();
-        String columns = ProcessingColumn(fields);
 
+        String columns = ProcessingColumn(fields);
         String values = ProcessingValues(fields);
-//        System.out.println("Enter values: ");
-//        Scanner scanner = new Scanner(System.in);
-//        String values = "\""+ scanner.nextLine() + "\"";
 
         Connection connection = connect();
         Statement statement = connection.createStatement();
@@ -99,7 +82,7 @@ public abstract class AbstractQueryCommand {
         System.out.println(String.format("Please, enter values column \"%s\" :",field.getName()));
         Scanner scanner = new Scanner(System.in);
         String res = scanner.nextLine();
-        //todo validation not Empty value
+        //todo validation not Empty values
         if (res.isEmpty()){
             System.out.println("Error! Input empty value.");
             return UserInputValues(field);
@@ -111,7 +94,7 @@ public abstract class AbstractQueryCommand {
         return res;
     }
 
-    String ProcessingColumn(Field[] columns)//, StringBuilder sbColumns, StringBuilder sbValues)
+    String ProcessingColumn(Field[] columns)
     {
         StringBuilder sb = new StringBuilder();
 
