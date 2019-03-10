@@ -36,7 +36,8 @@
                 <configuration>
                     <mainClass>org.courses.Program</mainClass>
                     <arguments>
-                        <argument>connect</argument>
+                        <argument>addManufacture</argument>
+                        <argument>CourseDB.db</argument>
                     </arguments>
                 </configuration>
             </plugin>
